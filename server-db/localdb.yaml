@@ -1,0 +1,34 @@
+version: "3.2"
+services:
+  db_general:
+    image: mariadb:10.11
+    container_name: db_general
+    restart: unless-stopped
+    networks:
+      - optima
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: root
+      MARIADB_PASSWORD: root
+    volumes:
+      - ./config/:/etc/mysql/mariadb.conf.d/
+    ports:
+      - 3307:3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    networks:
+      - optima
+    ports:
+      - 8008:80
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  db_general:
+
+networks:
+  optima:
+    external: true

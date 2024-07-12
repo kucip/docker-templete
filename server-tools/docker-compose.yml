@@ -1,0 +1,18 @@
+version: "3"
+services:
+  guacamole:
+    image: abesnier/guacamole
+    container_name: guacamole
+    restart: unless-stopped
+    networks:
+      - optima
+    volumes:
+      - $HOME/guacamole:/config
+    ports:
+      - 8080:8080
+volumes:
+  guacamole:
+
+networks:
+  optima:
+    external: true

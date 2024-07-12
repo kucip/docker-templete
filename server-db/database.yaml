@@ -1,0 +1,101 @@
+version: "3.2"
+services:
+  db_general:
+    image: mariadb:10.11
+    container_name: db_general
+    restart: unless-stopped
+    networks:
+      - optima
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: root
+      MARIADB_PASSWORD: root
+    volumes:
+      - $HOME/database/db_general:/var/lib/mysql
+      - ./config/50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
+    ports:
+      - 3306:3306
+
+  db_opnicare:
+    image: mariadb:10.11
+    container_name: db_opnicare
+    restart: unless-stopped
+    networks:
+      - optima
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: root
+      MARIADB_PASSWORD: root
+    volumes:
+      - $HOME/database/db_opnicare:/var/lib/mysql
+      - ./config/50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
+    ports:
+      - 3307:3306
+
+  db_smartkada:
+    image: mariadb:10.11
+    container_name: db_smartkada
+    restart: unless-stopped
+    networks:
+      - optima
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: root
+      MARIADB_PASSWORD: root
+    volumes:
+      - $HOME/database/db_smartkada:/var/lib/mysql
+      - ./config/50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
+    ports:
+      - 3308:3306
+
+  db_omedi:
+    image: mariadb:10.11
+    container_name: db_omedi
+    restart: unless-stopped
+    networks:
+      - optima
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: root
+      MARIADB_PASSWORD: root
+    volumes:
+      - $HOME/database/db_omedi:/var/lib/mysql
+      - ./config/50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
+    ports:
+      - 3309:3306
+    
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: unless-stopped
+    networks:
+      - optima
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - $HOME/database/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    networks:
+      - optima
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  db_general:
+  db_smartkada:
+  db_omedi:
+  db_opnicare:
+  postgres:
+
+networks:
+  optima:
+    external: true

@@ -1,0 +1,27 @@
+version: "3.2"
+services:
+  php_webserver:
+    build: './php/'
+    container_name: php_webserver
+    restart: unless-stopped
+    networks:
+      - optima
+    volumes:
+      - './html/:/var/www/html/'
+  webserver:
+    build: './apache/'
+    container_name: webserver
+    restart: unless-stopped
+    depends_on:
+      - php_webserver
+    networks:
+      - optima
+    ports:
+      - "80:80"
+    volumes:
+      - './html/:/var/www/html/'
+
+networks:
+  optima:
+    external: true
+
