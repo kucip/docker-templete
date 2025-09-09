@@ -1,8 +1,8 @@
-version: "3.2"
+# version: "3.8"
 services:
   db_general:
-    image: mariadb:10.11
-    container_name: db_general
+    image: mariadb:latest
+    container_name: datacenter
     restart: unless-stopped
     networks:
       - optima
@@ -11,7 +11,8 @@ services:
       MARIADB_USER: root
       MARIADB_PASSWORD: root
     volumes:
-      - ./config/:/etc/mysql/mariadb.conf.d/
+      - ./config/50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
+      - ./data:/home
     ports:
       - 3307:3306
 
