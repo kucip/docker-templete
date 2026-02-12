@@ -1,8 +1,8 @@
 # version: "3.8"
 services:
-  db_general:
+  db_sipjaki:
     image: mariadb:latest
-    container_name: datacenter
+    container_name: sipjaki
     restart: unless-stopped
     networks:
       - optima
@@ -14,21 +14,21 @@ services:
       - ./config/50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
       - ./data:/home
     ports:
-      - 3307:3306
+      - 8888:3306
 
-  phpmyadmin:
-    image: phpmyadmin
-    container_name: phpmyadmin
-    restart: unless-stopped
-    networks:
-      - optima
-    ports:
-      - 8008:80
-    environment:
-      - PMA_ARBITRARY=1
+  # phpmyadmin:
+  #   image: phpmyadmin
+  #   container_name: phpmyadmin
+  #   restart: unless-stopped
+  #   networks:
+  #     - optima
+  #   ports:
+  #     - 8008:80
+  #   environment:
+  #     - PMA_ARBITRARY=1
 
 volumes:
-  db_general:
+  db_sipjaki:
 
 networks:
   optima:
