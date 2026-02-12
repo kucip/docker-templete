@@ -14,7 +14,7 @@ services:
       - ./config/50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
       - ./data:/home
     ports:
-      - 8888:3306
+      - 12888:3306
 
   # phpmyadmin:
   #   image: phpmyadmin
