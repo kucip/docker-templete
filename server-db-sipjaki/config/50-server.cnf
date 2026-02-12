@@ -44,7 +44,7 @@ max_allowed_packet     = 16G
 
 # ---- General MySQL / performance ----
 max_connections = 200
-table_open_cache = 4000
+#table_open_cache = 4000
 #open_files_limit = 10000
 #query_cache_type = 0
 #query_cache_size = 0
@@ -114,30 +114,6 @@ collation-server      = utf8mb4_general_ci
 innodb_file_per_table = ON
 innodb_buffer_pool_size = 30G
 innodb_buffer_pool_instances = 3
-
-# ---- Tablespace / files ----
-innodb_file_per_table = 1
-innodb_flush_method = O_DIRECT
-
-# ---- Redo log (transaction log) ----
-innodb_log_files_in_group = 2
-innodb_log_file_size = 512M
-
-innodb_flush_log_at_trx_commit = 1
-sync_binlog = 1
-
-# ---- IO / threads ----
-innodb_io_capacity = 200
-# untuk HDD; jika SSD, naikkan (lihat var SSD section)
-innodb_read_io_threads = 4
-innodb_write_io_threads = 4
-
-# ---- Misc InnoDB tuning ----
-innodb_log_buffer_size = 32M
-innodb_thread_concurrency = 0
-# 0 = let InnoDB manage threads (modern MySQL)
-innodb_stats_on_metadata = OFF
-innodb_print_all_deadlocks = ON
 
 # this is only for embedded server
 [embedded]
