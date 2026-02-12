@@ -42,6 +42,15 @@ max_allowed_packet     = 16G
 #max_connections        = 100
 #table_cache            = 64
 
+# ---- General MySQL / performance ----
+max_connections = 200
+table_open_cache = 4000
+open_files_limit = 10000
+query_cache_type = 0
+query_cache_size = 0
+
+
+
 #
 # * Logging and Replication
 #
@@ -89,8 +98,8 @@ expire_logs_days        = 10
 
 # MySQL/MariaDB default is Latin1, but in Debian we rather default to the full
 # utf8 4-byte character set. See also client.cnf
-character-set-server  = utf8
-collation-server      = utf8_general_ci
+character-set-server  = utf8mb4
+collation-server      = utf8mb4_general_ci
 
 #
 # * InnoDB
@@ -113,13 +122,9 @@ innodb_flush_method = O_DIRECT
 # ---- Redo log (transaction log) ----
 innodb_log_files_in_group = 2
 innodb_log_file_size = 512M
-#each log file -> total redo log ~1G
 
-# ---- Durability / flushing ----
 innodb_flush_log_at_trx_commit = 1
-# safest (ACID). Set ke 2 hanya kalau terima risiko kehilangan 1s terakhir demi throughput.
 sync_binlog = 1
-# jika menggunakan replication/point-in-time recovery
 
 # ---- IO / threads ----
 innodb_io_capacity = 200
@@ -133,13 +138,6 @@ innodb_thread_concurrency = 0
 # 0 = let InnoDB manage threads (modern MySQL)
 innodb_stats_on_metadata = OFF
 innodb_print_all_deadlocks = ON
-
-# ---- General MySQL / performance ----
-max_connections = 200
-table_open_cache = 4000
-open_files_limit = 10000
-query_cache_type = 0
-query_cache_size = 0
 
 # this is only for embedded server
 [embedded]

@@ -2,7 +2,7 @@
 services:
   db_sipjaki:
     image: mariadb:latest
-    container_name: dbsipjaki
+    container_name: datasipjaki
     restart: unless-stopped
     networks:
       - optima
@@ -14,7 +14,7 @@ services:
       - ./config/50-server.cnf:/etc/mysql/mariadb.conf.d/50-server.cnf
       - ./data:/home
     ports:
-      - 8888:3306
+      - 12888:3306
 
   # phpmyadmin:
   #   image: phpmyadmin
