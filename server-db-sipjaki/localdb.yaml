@@ -1,6 +1,6 @@
 # version: "3.8"
 services:
-  db_sipjaki:
+  db_general:
     image: mariadb:latest
     container_name: dbsipjaki
     restart: unless-stopped
@@ -28,7 +28,7 @@ services:
   #     - PMA_ARBITRARY=1
 
 volumes:
-  db_sipjaki:
+  db_general:
 
 networks:
   optima:
